@@ -74,7 +74,7 @@ erreur_terrain lire_terrain(FILE *f, Terrain *t, int *x, int *y) {
 
       c = tab_ligne[j];
 
-      if (c != '#' && c != '.' && c != '~' && c != 'C')
+      if (c != '#' && c != '.' && c != '~' && c != 'C' && c != 'M')
         return ERREUR_CARACTERE;
 
       if (c == 'C'){
@@ -124,6 +124,8 @@ char afficher_case(Case c){
       return '~';
     case ROCHER:
       return '#';
+    case MARQUE:
+      return 'M';
   }
 }
 

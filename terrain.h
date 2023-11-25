@@ -2,7 +2,7 @@
 #define _TERRAIN_H_
 #include <stdio.h>
 
-typedef enum { LIBRE, EAU, ROCHER} Case;
+typedef enum { LIBRE, EAU, ROCHER, MARQUE} Case;
 
 #define DIM_MAX 256
 

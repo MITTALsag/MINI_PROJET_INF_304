@@ -129,4 +129,4 @@ D {A} 2B
 G {A} 8B
 D {A} 4B
 D {A} 9B
-A
+A G {A}2B

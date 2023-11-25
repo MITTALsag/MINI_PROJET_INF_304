@@ -12,8 +12,7 @@ void init_etat(etat_inter *etat) {
 
 /* Pas d'exécution de l'interprète : exécute une commande, modifie
    l'environnement et l'état, renvoie l'état du robot */
-resultat_inter exec_pas(Programme *prog, Environnement *envt,
-                        etat_inter *etat) {
+resultat_inter exec_pas(Programme *prog, Environnement *envt, etat_inter *etat) {
   Commande c;
   resultat_deplacement res;
   resultat_inter res_inter;
@@ -70,9 +69,17 @@ resultat_inter exec_pas(Programme *prog, Environnement *envt,
     }
     break;
   case Marque:
-    // Non implémenté
-    etat->pc++;
-    res_inter = OK_ROBOT;
+    if (est_vide(&(etat->stack))){
+      return ERREUR_PILE_VIDE;
+    }
+    else {
+      int param;
+      param = sommet(&(etat->stack));
+      depiler(&(etat->stack));
+      pose_marque(envt, param);
+      etat->pc++;
+      res_inter = OK_ROBOT;
+    }
     break;
   case DebutBloc:
     // Empiler le bloc (adresse de début de bloc) sur la pile

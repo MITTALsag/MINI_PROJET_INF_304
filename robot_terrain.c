@@ -70,6 +70,9 @@ void afficher_terrain_et_robot(Terrain *t, Robot *r) {
         case EAU:
           c = '~';
           break;
+        case MARQUE:
+          c = 'M';
+          break;
         }
       }
       printf("%c", c);

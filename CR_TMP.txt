@@ -32,11 +32,19 @@ ERREUR_CASE_DEPART
 
 TP7:
 
-
-
-
 ajout de la fonction stop pour exec pas a pas 
 
 creation fichier "grestion_erreur" ----> pour mettre toutes les gestion d'erreur
 
 ajout fonction afficher_prog dans programme.c 
+
+modif curiosity l: 39--->46 et 54--->63 pour afficher le programme et la pile
+
+ajout programme_bon ---> - echange      |
+                         - exec_bloc    | ----> a utiliser avec terrain_11x9
+                         - exec_cond    |
+                         - commande_M   |
+
+!!!! a mettre des espace pour R (les chiffre)
+
+ajout silent_mode

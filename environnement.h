@@ -54,6 +54,9 @@ void droite_envt(Environnement *envt);
  */
 int mesure_envt(Environnement *envt, int d);
 
+//pose ou retire une marque
+void pose_marque(Environnement* envt, int n);
+
 /* Afficher le terrain avec la position et l'orientation du robot */
 void afficher_envt(Environnement *envt);
 

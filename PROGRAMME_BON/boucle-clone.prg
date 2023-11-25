@@ -1,7 +1,10 @@
-{GAA DAA DAA GAA}2 2 2 * *
+{
+ GAA DAA DAA GAA
+}
+2 2 2 * *
 {
   XC
-   { 1X- X 31R C 43R !C! }
+   { 1X- X 3 1R C 4 3R !C! }
    { III }
   ?
 }

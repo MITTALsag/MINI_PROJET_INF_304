@@ -5,6 +5,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+bool silent_mode = true;
+bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
+
 
 void stop (void)
 {
@@ -36,16 +41,22 @@ int main(int argc, char **argv) {
   errp = lire_programme(&prog, argv[2]);
   gestion_erreur_programme(errp);
 
-  afficher_envt(&envt);
-  printf ("Programme:");
-  afficher_prog(&prog);
-  //print(&etat.stack);
-  printf ("\n");
-  char c = afficher_case(envt.t.tab[7][2]);
-  printf ("%c\n", c);
-  c = afficher_case(envt.t.tab[8][2]);
-  printf ("%c\n", c);
-  stop(); //pour faire le programme pas a pas 
+  if (!silent_avant_apres){
+    afficher_envt(&envt);
+    /* Afficher le programme */
+    printf ("Programme:");
+    afficher_prog(&prog);
+    printf("\n");
+    /* Afficher la pile */
+    printf ("Pile:");
+    print(&etat.stack);
+    printf ("\n");
+    /* Afficher sp */
+    printf ("SP:");
+    print(&etat.sp);
+    printf ("\n");
+    stop();
+  }
 
   /* Initialisation de l'état */
   init_etat(&etat);
@@ -54,14 +65,28 @@ int main(int argc, char **argv) {
 
     /* Affichage du terrain et du robot si le robot est OK*/
     if (res == OK_ROBOT){
-      afficher_envt(&envt);
-      printf ("Programme:");
-      afficher_prog(&prog);
-      printf("\n");
-      stop();
+      if (!silent_mode){
+        afficher_envt(&envt);
+        /* Afficher le programme */
+        printf ("Programme:");
+        afficher_prog(&prog);
+        printf("\n");
+        /* Afficher la pile */
+        printf ("Pile:");
+        print(&etat.stack);
+        printf ("\n");
+        /* Afficher sp */
+        printf ("SP:");
+        print(&etat.sp);
+        printf ("\n");
+        stop();
       }
+    }
 
   } while (res == OK_ROBOT);
+  
+  if (silent_mode)
+    afficher_envt(&envt);
 
   gestion_erreur_interprete(res);
 }

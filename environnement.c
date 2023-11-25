@@ -43,6 +43,7 @@ resultat_deplacement avancer_envt(Environnement *envt) {
     Case case_devant = envt->t.tab[x][y];
     switch (case_devant) {
     case LIBRE:
+    case MARQUE:
       avancer(&(envt->r));
       return OK_DEPL;
     case EAU:
@@ -75,7 +76,9 @@ void droite_envt(Environnement *envt) { tourner_a_droite(&(envt->r)); }
      0 rien (case libre ou en-dehors du terrain)
      1 eau
      2 rocher
-     3 erreur (valeur du paramètre incorrect)
+     3 marque
+     4 erreur (valeur du paramètre incorrect)
+
  */
 int mesure_envt(Environnement *envt, int d) {
   int x, y;   // Position courante du robot
@@ -153,9 +156,25 @@ int mesure_envt(Environnement *envt, int d) {
     return 1;
   case ROCHER:
     return 2;
+  case MARQUE:
+    return 3;
   }
   // Ne devrait pas arriver
-  return 3;
+  return 4;
+}
+
+
+void pose_marque(Environnement* envt, int n){
+  int x, y;   // Position courante du robot
+  position(&(envt->r), &x, &y);
+
+  if (n == 0){
+    envt->t.tab[x][y] = LIBRE;
+  }
+  else {
+    envt->t.tab[x][y] = MARQUE;
+  }
+
 }
 
 /* Afficher le terrain avec la position et l'orientation du robot */
@@ -196,6 +215,9 @@ void afficher_envt(Environnement *envt) {
           break;
         case EAU:
           c = '~';
+          break;
+        case MARQUE:
+          c = 'M';
           break;
         }
       }
