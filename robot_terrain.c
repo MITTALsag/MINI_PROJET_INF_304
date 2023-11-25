@@ -60,7 +60,7 @@ void afficher_terrain_et_robot(Terrain *t, Robot *r) {
         }
       } else {
         // Afficher la case
-        switch (t->tab[j][i]) {
+        switch (t->tab[i][j]) {
         case LIBRE:
           c = '.';
           break;
@@ -82,7 +82,7 @@ void afficher_terrain_et_robot(Terrain *t, Robot *r) {
    peut avancer dans le terrain t */
 int robot_peut_avancer(Terrain *t, Robot *r, int x_devant, int y_devant) {
 
-  if ((t->tab[y_devant][x_devant] == LIBRE) || 
+  if ((t->tab[x_devant][y_devant] == LIBRE) || 
     (r->x == 0 && r->o == Ouest) || 
     (r->x == t->largeur - 1 && r->o == Est) || 
     (r->y == 0 && r->o == Nord) || 
@@ -116,7 +116,6 @@ int main(int argc, char **argv) {
     printf("Erreur lors de la lecture du terrain\n");
     return 2;
   }
-  afficher_terrain(&t);
 
   // Initialisation du robot
   init_robot(&r, x, y, Est);

@@ -83,7 +83,7 @@ erreur_terrain lire_terrain(FILE *f, Terrain *t, int *x, int *y) {
       }
 
       case_ij = type_case(c);
-      t->tab[i][j] = case_ij;
+      t->tab[j][i] = case_ij;
     }
   }
 
@@ -131,7 +131,7 @@ void afficher_terrain(Terrain *t){
 
   for(int ligne = 0; ligne < t->hauteur; ligne++){
     for(int colonne = 0; colonne < t->largeur; colonne++){
-      printf("%c", afficher_case(t->tab[ligne][colonne]));
+      printf("%c", afficher_case(t->tab[colonne][ligne]));
     }
     printf("\n");
   }

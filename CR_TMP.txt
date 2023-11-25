@@ -1,0 +1,42 @@
+TP6:
+
+erreur possible de la lecture d'un terrain:
+OK,
+
+//si le fichier ne sais pas ouvert
+ERREUR_FICHIER, 
+
+//si a la lecture de la largeur/hauteur il y a un souci (pas un int...)
+ERREUR_FICHIER_LARGEUR,
+ERREUR_FICHIER_HAUTEUR,
+
+//si a la lecture de la largeur/hauteur la donne n'est pas dans le bon domaine (0 <= donee < DIM_MAX)
+ERREUR_LARGEUR_DOMAINE,
+ERREUR_HAUTEUR_DOMAINE,
+
+//si il y a moin de ligne que hauteur
+ERREUR_MOIN_DE_LIGNE,
+
+//si apres avoir lu toutes les ligne il en reste encore une 
+ERREUR_TROP_DE_LIGNE,
+
+//si la largeur d'une ligne est trop petite/longue
+ERREUR_LARGEUR_TROP_PETITE,
+ERREUR_LARGEUR_TROP_GRANDE,
+
+//si un des caractère lu n'est pas '#', '.', '~' ou 'C'
+ERREUR_CARACTERE,
+
+//si il y a pas de case depart dans le fichier lu
+ERREUR_CASE_DEPART
+
+TP7:
+
+
+
+
+ajout de la fonction stop pour exec pas a pas 
+
+creation fichier "grestion_erreur" ----> pour mettre toutes les gestion d'erreur
+
+ajout fonction afficher_prog dans programme.c 

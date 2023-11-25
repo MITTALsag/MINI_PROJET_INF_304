@@ -1,0 +1,1 @@
+A G A 0M D D A A A G 3M A D A 8M G G A D A A
