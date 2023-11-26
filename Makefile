@@ -37,7 +37,7 @@ curiosity.o: curiosity.c environnement.h programme.h \
 	interprete.h robot.h terrain.h type_pile.h gestion_erreur.h
 
 curiosity-test.o: curiosity-test.c environnement.h programme.h \
-	interprete.h robot.h terrain.h type_pile.h
+	interprete.h robot.h terrain.h type_pile.h gestion_erreur.h
 
 ######################################################################
 #                       Règles d'édition de liens                    #
@@ -57,12 +57,12 @@ curiosity: curiosity.o environnement.o programme.o interprete.o \
 	$(CC) $^ -o $@
 
 curiosity-test: curiosity-test.o environnement.o programme.o interprete.o \
-	robot.o terrain.o type_pile.o
+	robot.o terrain.o type_pile.o gestion_erreur.o
 	$(CC) $^ -o $@
 
 curiosity-test%: curiosity-test.o environnement.o programme.o interprete%.o \
-	robot.o terrain.o type_pile.o
+	robot.o terrain.o type_pile.o gestion_erreur.o
 	$(CC) $^ -o $@
 
 clean:
-	rm -f $(PROGRAMMES) *.o
+	rm -f $(PROGRAMMES) *.o curiosity-test0 curiosity-test1 curiosity-test2 curiosity-test3 curiosity-test4 curiosity-test5 curiosity-test6 curiosity-test7 curiosity-test8 curiosity-test9

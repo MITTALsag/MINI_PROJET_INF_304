@@ -8,8 +8,7 @@
    - initialise le robot : coordonnées initiales lues dans le fichier
    terrain, orientation initiale vers l'est
 */
-erreur_terrain initialise_environnement(Environnement *envt,
-                                        char *fichier_terrain) {
+erreur_terrain initialise_environnement(Environnement *envt, char *fichier_terrain) {
   erreur_terrain errt;
   int x, y; // Position initiale du robot
   FILE *f;

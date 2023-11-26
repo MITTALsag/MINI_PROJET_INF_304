@@ -1,2 +1,0 @@
-
-GAAG 1M DDAA 0M

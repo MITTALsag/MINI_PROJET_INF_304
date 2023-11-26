@@ -1,0 +1,52 @@
+curiosity-test------>Fichier_EXEC_bon/boucle-clone_N.test : 
+-Evenement : OK
+-La position attendu du robot est (5, 2) alors que la position reel du robot est (5, 3)
+L'orientaion du robot attendu Est  mais l'orientation reel est N.
+
+
+curiosity-test------>Fichier_EXEC_bon/boucle-clone_P.test : 
+-Evenement : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/boucle-clone_S.test : 
+-Erreur : le robot n'est pas sortie du terrain.
+
+
+curiosity-test------>Fichier_EXEC_bon/calcul_S.test : 
+-Evenement : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/chemin_N.test : 
+-Evenement : OK
+-Position attendu : Ok
+-Orientation attendu : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/clone_S.test : 
+-Evenement : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/event_F_crash.test : 
+-Evenement : OK
+-Position attendu : Ok
+-Orientation attendu : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/event_F_plouf.test : 
+-Evenement : OK
+-Position attendu : Ok
+-Orientation attendu : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/terrain_11x9_O.test : 
+-Evenement : OK
+
+
+curiosity-test------>Fichier_EXEC_bon/terrain_11x9_S.test : 
+-Erreur : le robot n'est pas sortie du terrain.
+
+
+curiosity-test------>Fichier_EXEC_bon/Une_possibilite.test : 
+-Evenement : OK
+
+

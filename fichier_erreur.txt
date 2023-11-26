@@ -1,0 +1,4 @@
+curiosity-test------>Fichier_EXEC_bon/Une_possibilite.test : 
+-Erreur : le robot n'est pas sortie du terrain.
+
+

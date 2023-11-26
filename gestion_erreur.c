@@ -5,6 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define RED "\x1B[31m"
+#define GRN "\x1B[32m"
+#define WHT "\x1B[37m"
+#define RESET "\x1B[0m"
+
+
 void gestion_erreur_terrain(erreur_terrain e) {
   switch (e) {
   case OK:
@@ -107,4 +113,128 @@ void gestion_erreur_interprete(resultat_inter res) {
       printf("ERREUR : division par 0\n");
       break;
     }
+}
+
+void gestion_erreur_NF(Robot* rob, FILE* fich, FILE* fich_err){
+  int x, y; /* recupere la position attendu du robot */
+  int xr, yr; /* position reel du robot*/
+  char o; /* recupere l'orintation attendu du robot */
+  Orientation or; /* orientation reel du robot */
+
+  fscanf(fich , "%d %d\n", &x, &y);
+  fscanf(fich , "%c\n", &o);
+
+  position(rob, &xr, &yr);
+  or = orient(rob);
+
+  if (xr != x || yr != y){
+    printf(RED"La position attendu du robot est (%d, %d) alors que la position reel du robot est (%d, %d)\n"RESET, x, y, xr, yr);
+    fprintf(fich_err, "-La position attendu du robot est (%d, %d) alors que la position reel du robot est (%d, %d)\n", x, y, xr, yr );
+  }
+  else {
+    printf(GRN"Position attendu : Ok\n"RESET);
+    fprintf(fich_err, "-Position attendu : Ok\n");
+  }
+  switch(or){
+    case Nord:
+      if (o != 'N'){
+        printf(RED"L'orientaion du robot attendu Nord  mais l'orientation reel est %c.\n"RESET, o);
+        fprintf(fich_err, "-L'orientaion du robot attendu Nord  mais l'orientation reel est %c.\n", o);
+      }
+      else {
+        printf(GRN"Orientation attendu : OK\n"RESET);
+        fprintf(fich_err, "-Orientation attendu : OK\n");
+      }
+      break;
+    case Sud:
+      if (o != 'S'){
+        printf(RED"L'orientaion du robot attendu Sud  mais l'orientation reel est %c.\n"RESET, o);
+        fprintf(fich_err, "-L'orientaion du robot attendu Sud  mais l'orientation reel est %c.\n", o);
+      }
+      else {
+        printf(GRN"Orientation attendu : OK\n"RESET);
+        fprintf(fich_err, "-Orientation attendu : OK\n");
+      }
+      break;
+    case Est:
+      if (o != 'E'){
+        printf(RED"L'orientaion du robot attendu Est  mais l'orientation reel est %c.\n"RESET, o);
+        fprintf(fich_err,"L'orientaion du robot attendu Est  mais l'orientation reel est %c.\n", o);
+      }
+      else {
+        printf(GRN"Orientation attendu : OK\n"RESET);
+        fprintf(fich_err, "-Orientation attendu : OK\n");
+      }
+      break;
+    case Ouest:
+      if (o != 'O'){
+        printf(RED"L'orientaion du robot attendu Ouest mais l'orientation reel est %c.\n"RESET, o);
+        fprintf(fich_err,"L'orientaion du robot attendu Ouest mais l'orientation reel est %c.\n", o);
+      }
+      else {
+        printf(GRN"Orientation attendu : OK\n"RESET);
+        fprintf(fich_err, "-Orientation attendu : OK\n");
+      }
+      break;
+  }
+}
+
+
+/* Pour curiostity_test, pour les evenement */
+void gestion_erreur_event(char event, resultat_inter res, Robot* rob, FILE* fich, FILE* fich_err){
+  /* Affichage des resultats */
+  switch(event){
+    case 'N':
+      if (res == ARRET_ROBOT || res == OK_ROBOT){
+        printf(GRN"Evenement : OK\n"RESET);
+        fprintf(fich_err, "-Evenement : OK\n");
+        gestion_erreur_NF(rob, fich, fich_err);
+      }
+      else{ 
+        printf(RED"Erreur : le robot n'a pas terminer sur une case libre\n"RESET);
+        fprintf(fich_err, "-Erreur : le robot n'a pas terminer sur une case libre\n");
+      }
+      break;
+    case 'F':
+      if (res != OK_ROBOT){ /* si le robot est soit sorti s'est crashé, est tombé dans l'eau ou le programme est finis*/
+        printf(GRN"Evenement : OK\n"RESET);
+        fprintf(fich_err, "-Evenement : OK\n");
+        gestion_erreur_NF(rob, fich, fich_err);
+      }
+      else{ 
+        printf(RED"Erreur : le programme n'est pas finis\n"RESET);
+        fprintf(fich_err, "-Erreur : le programme n'est pas finis\n");
+      }
+      break;
+    case 'S':
+      if (res == SORTIE_ROBOT){
+        printf(GRN"Evenement : OK\n"RESET);
+        fprintf(fich_err, "-Evenement : OK\n");
+      }
+      else{ 
+        printf(RED"Erreur : le robot n'est pas sortie du terrain.\n"RESET);
+        fprintf(fich_err, "-Erreur : le robot n'est pas sortie du terrain.\n");
+      }
+      break;
+    case 'O':
+      if (res == CRASH_ROBOT){
+        printf(GRN"Evenement : OK\n"RESET);
+        fprintf(fich_err, "-Evenement : OK\n");
+      }
+      else{ 
+        printf(RED"Erreur : le robot n'a pas rencontré d'obstacle\n"RESET);
+        fprintf(fich_err, "-Erreur : le robot n'a pas rencontré d'obstacle\n");
+      }
+      break;
+    case 'P':
+      if (res == PLOUF_ROBOT){
+        printf(GRN"Evenement : OK\n"RESET);
+        fprintf(fich_err, "-Evenement : OK\n");
+      }
+      else{ 
+        printf(RED"Erreur : le robot n'est pas tombé dans l'eau\n"RESET);
+        fprintf(fich_err, "-Erreur : le robot n'est pas tombé dans l'eau\n");
+      }
+      break;
+  }
 }

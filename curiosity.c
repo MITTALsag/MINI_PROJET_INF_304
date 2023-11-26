@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool silent_mode = true;
+bool silent_mode = false;
 bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
 
 

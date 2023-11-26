@@ -48,3 +48,23 @@ ajout programme_bon ---> - echange      |
 !!!! a mettre des espace pour R (les chiffre)
 
 ajout silent_mode
+
+ajout fonction pose_marques dans environnement.c et modif type Case ---> ajouter MARQUE modif des switch en rajoutant case MARQUE: ... 
+
+
+EXO 2:
+
+creation gestion_erreur_event -----> pour l'evenement attendu
+creation gestion_erreur_NF ----> pour les event N et F 
+
+creation dossier Fichier_EXEC ----> pour les .test
+(couvre au moin une fois chaqe commande)
+
+modif curiosity test pour faire tout les fichier a la fois (ajout couleur) et modif piur mettre tout dans un fichier
+
+cree un make_interprete_i.sh pour tout compiler
+cree un exec_interprete_i.sh pour tout compiler et exectuer et mettre tout des resultat dans le dossier resultat
+
+
+RESULTAT : 
+seul 1, 3, 7, 8 sont bon 
