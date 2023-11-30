@@ -68,3 +68,9 @@ cree un exec_interprete_i.sh pour tout compiler et exectuer et mettre tout des r
 
 RESULTAT : 
 seul 1, 3, 7, 8 sont bon 
+
+
+
+TP8
+
+exo 1, 2 facile rien a dire 

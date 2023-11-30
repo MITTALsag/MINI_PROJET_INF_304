@@ -12,7 +12,7 @@ Case generation_aleatoire_case(int prob);
    Résultat : T est modifié et contient le terrain généré.
               La case centrale de T ne contient pas d'obstacle.
  */
-float generation_aleatoire(Terrain *T, int l, int h, float dObst);
+void generation_aleatoire(Terrain *T, int l, int h, float dObst);
 
 /* determine s'il existe un chemin du centre au bord du terrain T
    version avec tableau annexe

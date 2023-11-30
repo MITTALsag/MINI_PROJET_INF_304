@@ -10,8 +10,14 @@ Case generation_aleatoire_case(int prob){
 
   int resultat = rand() % 100; /* Un nombre entre 0 et 99 ----> on considère que le 0 représente le 100*/
 
-  if (resultat < prob) /* si par ex prob = 30 (30% de chance d'avoir un rocher) alors si resultat < 30 ---> resultat appartient a [0 ; 29] donc est dans les 30% */
-    return ROCHER;
+
+  if (resultat < prob){ /* si par ex prob = 30 (30% de chance d'avoir un rocher) alors si resultat < 30 ---> resultat appartient a [0 ; 29] donc est dans les 30% */
+    /* pour mettre de l'eau ou un rocher de facon aléatoire */
+    if (rand() % 2 == 1)
+      return ROCHER;
+    else 
+      return EAU;
+  }
   else                  /* sinon resultat appartient  [30 ; 99] donc pas dans les 30% */
     return LIBRE;
 }
@@ -22,7 +28,7 @@ Case generation_aleatoire_case(int prob){
    Résultat : T est modifié et contient le terrain généré.
               La case centrale de T ne contient pas d'obstacle.
  */
-float generation_aleatoire(Terrain *T, int l, int h, float dObst) {
+void generation_aleatoire(Terrain *T, int l, int h, float dObst) {
   int i, j;
   float dens_obtenu = 0.;
   T->largeur = l;
@@ -45,7 +51,6 @@ float generation_aleatoire(Terrain *T, int l, int h, float dObst) {
     }
   }
 
-  return dens_obtenu / (l*h);
 }
 
 // determine s'il existe un chemin du centre au bord du terrain T

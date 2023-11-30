@@ -43,6 +43,7 @@ int main(int argc, char **argv) {
   int N, i, l, h;
   float dObst;
   float dens_obtenu; /* pour recup la densité de chaque terrain valide (avec chemein vers l'exterieur existant)*/
+  int nb_case_terr;
   float dens_moy = 0; /* pour recupe la somme des denstité des terrains valide (avec chemein vers l'exterieur existant) pour ensuite calculer la moyenne */
   int nb_terrain_valide = 0; /* nombre de terrain valide (pour calculer la densité moyenne) */
   FILE *resFile;
@@ -86,7 +87,7 @@ int main(int argc, char **argv) {
   
 
   for(i = 0 ; i < N ; i++){
-    dens_obtenu = generation_aleatoire(&T, l, h, dObst);
+    generation_aleatoire(&T, l, h, dObst);
 
     if (!silent_mode){
       afficher_terrain(&T);
@@ -103,6 +104,8 @@ int main(int argc, char **argv) {
 
     if (existe_chemin_vers_sortie(&T)){
       ecrire_terrain(resFile, &T, l/2, h/2);
+      nb_case_terr = nb_cases_occupees(&T);
+      dens_obtenu = (float) nb_case_terr / (l*h);
       nb_terrain_valide++;
       dens_moy += dens_obtenu;
       fprintf(resFile, "Densité d'obstacle du terrain : %f\n", dens_obtenu);
