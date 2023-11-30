@@ -150,7 +150,7 @@ void ecrire_terrain(FILE *f, Terrain *t, int x, int y){
         fprintf(f, "C");
       }
       else 
-        fprintf(f, "%c", afficher_case(t->tab[ligne][colonne]));
+        fprintf(f, "%c", afficher_case(t->tab[colonne][ligne]));
     }
     fprintf(f, "\n");
   }
