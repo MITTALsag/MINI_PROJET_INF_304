@@ -42,7 +42,7 @@ resultat_deplacement avancer_envt(Environnement *envt) {
     return SORTIE;
   } 
   else if (!verif_M){
-    printf("Le programme ne respecte pas la propriété\n");
+    printf("Le programme ne respecte pas la propriété (celle de faire une mesure avant d'avancer).\n");
     exit(1);
   }
   else {

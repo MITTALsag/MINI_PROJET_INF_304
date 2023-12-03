@@ -9,8 +9,8 @@
 #include <unistd.h>
 
 
-bool silent_mode = false;
-bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
+bool silent_mode = true;
+bool silent_avant_apres = true; //sert a montrer au debut et a la fin de l'execution
 
 
 void stop (void)

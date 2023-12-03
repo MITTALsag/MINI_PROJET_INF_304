@@ -11,7 +11,7 @@ void stop (void)
     while (enter != '\r' && enter != '\n') { enter = getchar(); }
 }
 
-bool silent_mode = false;
+bool silent_mode = true;
 
 #define RED "\x1B[31m"
 #define GRN "\x1B[32m"
