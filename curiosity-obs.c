@@ -82,8 +82,8 @@ int main(int argc, char **argv) {
         print(&etat.sp);
         printf ("\n");
         /* choisir entre un des deux : stop pour exec pas a pas et usleep pour afficher toutes les etapes mais tres vite */
-        usleep(100);
-        //stop(); 
+        //usleep(100);
+        stop(); 
       }
     }
 

@@ -1,6 +1,6 @@
 CC=clang -Wall -g
 
-PROGRAMMES=test_terrain test_robot robot_terrain curiosity curiosity-test test_generation_terrains curiosity-perf
+PROGRAMMES=test_terrain test_robot robot_terrain curiosity curiosity-test test_generation_terrains curiosity-perf curiosity-obs
 
 all: $(PROGRAMMES)
 
@@ -21,15 +21,17 @@ robot.o: robot.c robot.h
 
 terrain.o: terrain.c terrain.h
 
-environnement.o: environnement.c environnement.h robot.h terrain.h
+observateur.o: observateur.c observateur.h programme.h
+
+environnement.o: environnement.c environnement.h robot.h terrain.h observateur.h
 
 programme.o: programme.c programme.h type_pile.h
 
 interprete.o: interprete.c interprete.h environnement.h \
-	programme.h type_pile.h robot.h terrain.h
+	programme.h type_pile.h robot.h terrain.h observateur.h
 
 interprete%.o: interprete%.c interprete.h environnement.h \
-	programme.h type_pile.h robot.h terrain.h
+	programme.h type_pile.h robot.h terrain.h observateur.h
 
 type_pile.o: type_pile.c type_pile.h
 
@@ -46,6 +48,9 @@ test_generation_terrains.o: test_generation_terrains.c terrain.h
 curiosity-perf.o: curiosity-perf.c environnement.h programme.h \
 	interprete.h robot.h terrain.h type_pile.h gestion_erreur.h
 
+curiosity-obs.o: curiosity-obs.c environnement.h programme.h \
+	interprete.h robot.h terrain.h type_pile.h gestion_erreur.h observateur.h
+
 ######################################################################
 #                       Règles d'édition de liens                    #
 ######################################################################
@@ -60,22 +65,26 @@ robot_terrain: robot_terrain.o terrain.o robot.o
 	$(CC) $^ -o $@
 
 curiosity: curiosity.o environnement.o programme.o interprete.o \
-	robot.o terrain.o type_pile.o gestion_erreur.o
+	robot.o terrain.o type_pile.o gestion_erreur.o observateur.o
 	$(CC) $^ -o $@
 
 curiosity-test: curiosity-test.o environnement.o programme.o interprete.o \
-	robot.o terrain.o type_pile.o gestion_erreur.o
+	robot.o terrain.o type_pile.o gestion_erreur.o observateur.o
 	$(CC) $^ -o $@
 
 curiosity-test%: curiosity-test.o environnement.o programme.o interprete%.o \
-	robot.o terrain.o type_pile.o gestion_erreur.o
+	robot.o terrain.o type_pile.o gestion_erreur.o observateur.o
 	$(CC) $^ -o $@
 
 test_generation_terrains: test_generation_terrains.o generation_terrains.o terrain.o
 	$(CC) $^ -o $@
 
 curiosity-perf: curiosity-perf.o environnement.o programme.o interprete.o \
-	robot.o terrain.o type_pile.o gestion_erreur.o generation_terrains.o
+	robot.o terrain.o type_pile.o gestion_erreur.o generation_terrains.o observateur.o
+	$(CC) $^ -o $@
+
+curiosity-obs: curiosity-obs.o  environnement.o programme.o interprete.o \
+	robot.o terrain.o type_pile.o gestion_erreur.o generation_terrains.o observateur.o
 	$(CC) $^ -o $@
 
 clean:

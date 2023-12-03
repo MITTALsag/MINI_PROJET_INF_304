@@ -10,7 +10,7 @@
 #include <stdbool.h>
 
 bool silent_mode = true;
-bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
+bool silent_avant_apres = true; //sert a montrer au debut et a la fin de l'execution
 
 #define RED "\x1B[31m"
 #define GRN "\x1B[32m"
@@ -26,23 +26,26 @@ void stop (void)
 }
 
 /* Pour ecrire le resultat du fichier i a la ligne i */
-void gestion_res(FILE* fich_res, resultat_inter res, int nb_pas ,int* nb_sortie, int* nb_bloque, int* nb_obstacle, int* nb_pas_moy){
+void gestion_res(FILE* fich_res, resultat_inter res, int nb_pas ,int* nb_sortie, int* nb_bloque, int* nb_bloque_pas_max, int* nb_obstacle, int* nb_pas_moy){
     switch(res){
         case OK_ROBOT:
+            fprintf(fich_res, "\nCuriosity est bloqué : le robot à atteint le nombre de pas max (-1)\n");
+            *nb_bloque_pas_max +=1;
+            break;
         case ARRET_ROBOT:
-            fprintf(fich_res, "curiosity est bloqué (Programme arreté ou nb_pas_max atteint) (-1).\n");
+            fprintf(fich_res, "\ncuriosity est bloqué (Programme arreté) (-1).\n");
             *nb_bloque +=1;
             break;
         case PLOUF_ROBOT:
-            fprintf(fich_res, "curiosity est tombé dans l'eau (-2).\n");
+            fprintf(fich_res, "\ncuriosity est tombé dans l'eau (-2).\n");
             *nb_obstacle +=1;
             break;
         case CRASH_ROBOT:
-            fprintf(fich_res, "curiosity s'est écrasé contre un rocher (-3).\n");
+            fprintf(fich_res, "\ncuriosity s'est écrasé contre un rocher (-3).\n");
             *nb_obstacle +=1;
             break;
         case SORTIE_ROBOT:
-            fprintf(fich_res, "curiosity est sort, avec (%d) pas.\n", nb_pas);
+            fprintf(fich_res, "\ncuriosity est sorti, avec (%d) pas.\n", nb_pas);
             *nb_sortie += 1;
             *nb_pas_moy += nb_pas;
             break;
@@ -50,6 +53,8 @@ void gestion_res(FILE* fich_res, resultat_inter res, int nb_pas ,int* nb_sortie,
             printf("Erreur resultat impossible\n");
             exit(1);
     }
+    fprintf(fich_res, "\n----------------------------------------------------------------------------\n");
+
 }
 
 
@@ -65,13 +70,18 @@ int main(int argc, char **argv) {
     Terrain T;
     /* initialisation valeur pour les stats */
     int nb_sortie = 0;
-    int nb_bloque = 0;
     int nb_obstacle = 0;
     int nb_pas = 0;
+    int nb_bloque_pas_max = 0; //bloque car nb_pas_max atteint
+    int nb_bloque_impossible = 0; //bloque car pas de sortie vers l'exterieur
+    int nb_bloque = 0; //car programme fini mais pas sorti
 
-    int pour_sortie = 0;
-    int pour_obstacle = 0;
-    int pour_bloque = 0;
+
+    float pour_sortie = 0;
+    float pour_obstacle = 0;
+    float pour_bloque = 0;
+    float pour_bloque_impossible = 0;
+    float pour_bloque_pas_max = 0;
 
 
     if (argc < 9) {
@@ -109,10 +119,11 @@ int main(int argc, char **argv) {
     resFile = fopen(argv[8], "w");
 
     // Écriture du nombre de terrains
-    fprintf(resFile, "Nombre de terrain testé : %d\n", N);
-    fprintf(resFile, "----------------------------------------------------------------------------\n");
+    fprintf(resFile, "\nNombre de terrain testé : %d\n", N);
+    fprintf(resFile, "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
     // Initialisation de la fonction random
+    //srand(graine);
     srand(time(NULL));
 
     for(i = 0 ; i < N ; i++){
@@ -169,7 +180,7 @@ int main(int argc, char **argv) {
             } while (res == OK_ROBOT && j < nb_step_max);
 
             /* affichage dans resFILe du resultat du terrain i */
-            gestion_res(resFile, res, j, &nb_sortie, &nb_bloque, &nb_obstacle, &nb_pas);
+            gestion_res(resFile, res, j, &nb_sortie, &nb_bloque, &nb_bloque_pas_max, &nb_obstacle, &nb_pas);
 
             /* pour verifier que gestion_res est bon */
             if(!silent_avant_apres){
@@ -180,23 +191,41 @@ int main(int argc, char **argv) {
 
         }
         else {
-            fprintf(resFile, "curiosity est bloqué (il n'existe pas de chemin vers le bord du terrain depuis le centre) (-1).\n"); 
-            nb_bloque++;
+            fprintf(resFile, "curiosity est bloqué (il n'existe pas de chemin vers le bord du terrain depuis le centre) (-4).\n"); 
+            nb_bloque_impossible++;
+            fprintf(resFile, "----------------------------------------------------------------------------\n");
+
         }
     } 
 
     /* Écriture/Affichage des statistiques */
 
-    pour_sortie = (int) (((float) nb_sortie / (float) N) * 100.);
-    pour_bloque = (int) (((float) nb_bloque / (float) N) * 100.);
-    pour_obstacle = (int) (((float) nb_obstacle / (float) N) * 100.);
+    pour_sortie = (((float) nb_sortie / (float) N) * 100.);
+    pour_bloque = (((float) nb_bloque / (float) N) * 100.);
+    pour_obstacle = (((float) nb_obstacle / (float) N) * 100.);
+    pour_bloque_impossible = (((float) nb_bloque_impossible / (float) N) * 100.);
+    pour_bloque_pas_max = (((float)nb_bloque_pas_max / (float) N) * 100.);
 
-    printf("Curiosity est sortie %d fois. Ce qui represente %d%% de sortie.\n", nb_sortie, pour_sortie);
-    printf("Curiosity à été bloqué %d fois. Ce qui represente %d%%\n", nb_bloque, pour_bloque);
-    printf("Curiosity à rencontré %d obstacle. Ce qui represente %d%% d'accident (rocher ou eau)\n", nb_obstacle, pour_obstacle);
+    printf("\n----------------------------------------------------------------------------\n");
+    printf("\nCuriosity est sortie %d fois. Ce qui represente %f%% de sortie.\n", nb_sortie, pour_sortie);
+    printf("\n----------------------------------------------------------------------------\n");
 
-    if (nb_sortie > 0)
-        printf("Le nombre de pas moyen pour sortir est : %d\n", (int)((float)nb_pas/(float)nb_sortie));
+    printf("\nCuriosity à été bloqué %d fois. Ce qui represente %f%%\n", nb_bloque, pour_bloque);
+    printf("\n----------------------------------------------------------------------------\n");
+
+    printf("\nCuriosity à été bloqué car il a atteint le nombre de pas max %d fois. Ce qui represente %f%%\n", nb_bloque_pas_max, pour_bloque_pas_max);
+    printf("\n----------------------------------------------------------------------------\n");
+
+    printf("\nIl y a eut %d terrain ou il était impossible de sortir car pas de chemin vers l'exeterieur. Ce qui represente %f%% des terrain cree.\n", nb_bloque_impossible, pour_bloque_impossible);
+    printf("\n----------------------------------------------------------------------------\n");
+    
+    printf("\nCuriosity à rencontré %d obstacle. Ce qui represente %f%% d'accident (rocher ou eau)\n", nb_obstacle, pour_obstacle);
+    printf("\n----------------------------------------------------------------------------\n");
+    
+    if (nb_sortie > 0){
+        printf("\nLe nombre de pas moyen pour sortir est : %d\n", (int)((float)nb_pas/(float)nb_sortie));
+        printf("\n----------------------------------------------------------------------------\n");
+    }
 
     fclose(resFile);
 

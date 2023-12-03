@@ -3,6 +3,7 @@
 
 #include "robot.h"
 #include "terrain.h"
+#include "observateur.h"
 
 /* Environnement : terrain + robot */
 

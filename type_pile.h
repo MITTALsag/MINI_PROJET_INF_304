@@ -1,7 +1,7 @@
 #ifndef _TYPE_PILE_H_
 #define _TYPE_PILE_H_
 
-#define TAILLE_MAX 100
+#define TAILLE_MAX 100000
 
 typedef struct {
   int n;

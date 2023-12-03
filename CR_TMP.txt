@@ -74,3 +74,50 @@ seul 1, 3, 7, 8 sont bon
 TP8
 
 exo 1, 2 facile rien a dire 
+
+exo 3 
+on met bloque_possible (-1)
+bloque_impossible (-4)
+
+
+ex 4:
+
+infini_laby ---> marche bien pour les bay mais boucle ---> M>
+|                                                          MM
+---->marche mal pour les terrain ou il y a beaucoup d'espace--->mais bien pour les couloir
+
+
+
+infini_terrain----> boucle ...
+                           .#.
+                           ...
+--->tourne autour du rocher
+
+...........~...
+.~..#....~.....
+.#.~~.......~..
+.....#..#..~...
+..~....~...#...
+##...........~.
+....#......#...
+......~C...#~#.
+...#....~..#...
+.......#...#.~.
+.........~..~.~
+.......#.......
+....~.....~....
+..........~#.~#
+#......~...~...
+
+
+                               ...
+infini_gauche ----- > boucle >..#.
+                               ...
+
+----> tourne autour du rocher
+
+
+infini_gauche_marque----> boucle mais pas sur de quand 
+
+
+IDEE rajouter le fais que ca ecrivent dnas un fichier tout les terrain ou on a ete bloqué

@@ -2,6 +2,10 @@
 #include "environnement.h"
 
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+bool verif_M = false;
 
 /* Initialise l'environnement envt :
    - lit le terrain dans le fichier fichier_terrain
@@ -36,7 +40,13 @@ resultat_deplacement avancer_envt(Environnement *envt) {
       (y >= hauteur(&envt->t))) {
     // Le robot est sorti
     return SORTIE;
-  } else {
+  } 
+  else if (!verif_M){
+    printf("Le programme ne respecte pas la propriété\n");
+    exit(1);
+  }
+  else {
+  
     // À corriger : il devrait y avoir une fonction pour cela dans le
     // paquetage terrain
     Case case_devant = envt->t.tab[x][y];
@@ -44,6 +54,7 @@ resultat_deplacement avancer_envt(Environnement *envt) {
     case LIBRE:
     case MARQUE:
       avancer(&(envt->r));
+      verif_M = false;
       return OK_DEPL;
     case EAU:
       return PLOUF;
@@ -113,6 +124,7 @@ int mesure_envt(Environnement *envt, int d) {
   case 1: // devant
     mx = x + dx;
     my = y + dy;
+    verif_M = true;
     break;
   case 2: // devant droite
     mx = x + dx - dy;

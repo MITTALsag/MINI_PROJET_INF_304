@@ -1,5 +1,4 @@
 #include "interprete.h"
-#include "type_pile.h"
 
 /* Interprétation d'un programme dans un environnement */
 
@@ -10,12 +9,16 @@ void init_etat(etat_inter *etat) {
   etat->pc = 0;
 }
 
+
+int deb_bloc = -1;
+
 /* Pas d'exécution de l'interprète : exécute une commande, modifie
    l'environnement et l'état, renvoie l'état du robot */
 resultat_inter exec_pas(Programme *prog, Environnement *envt, etat_inter *etat) {
   Commande c;
   resultat_deplacement res;
   resultat_inter res_inter;
+
 
   if (etat->pc == prog->lg) {
     return ARRET_ROBOT;
@@ -84,6 +87,7 @@ resultat_inter exec_pas(Programme *prog, Environnement *envt, etat_inter *etat) 
   case DebutBloc:
     // Empiler le bloc (adresse de début de bloc) sur la pile
     empiler(&(etat->stack), etat->pc + 1);
+    deb_bloc = etat->pc;
     // Commande suivante : commande suivant la fin du bloc empilé
     etat->pc = c.aux + 1;
     res_inter = OK_ROBOT;
@@ -108,7 +112,12 @@ resultat_inter exec_pas(Programme *prog, Environnement *envt, etat_inter *etat) 
   case ExecBloc:
     if (est_vide(&(etat->stack))) {
       return ERREUR_PILE_VIDE;
-    } else {
+    } 
+    else if (!detection_groupe(prog, deb_bloc)){
+      printf("Ne respect pas la propriete de l'execution d'un groupe\n");
+      exit(1);
+    }
+    else {
       int adrexec;
       // Récupérer l'adresse du bloc à exécuter sur la pile
       adrexec = sommet(&(etat->stack));

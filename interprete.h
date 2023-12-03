@@ -4,6 +4,10 @@
 #include "environnement.h"
 #include "programme.h"
 #include "type_pile.h"
+#include "observateur.h"
+
+#include <stdbool.h>
+#include <stdlib.h>
 
 /* Interprétation d'un programme dans un environnement */
 
