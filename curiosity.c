@@ -9,8 +9,8 @@
 #include <unistd.h>
 
 
-bool silent_mode = true;
-bool silent_avant_apres = true; //sert a montrer au debut et a la fin de l'execution
+bool silent_mode = false;
+bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
 
 
 void stop (void)
@@ -81,8 +81,8 @@ int main(int argc, char **argv) {
         print(&etat.sp);
         printf ("\n");
         /* choisir entre un des deux : stop pour exec pas a pas et usleep pour afficher toutes les etapes mais tres vite */
-        usleep(100);
-        //stop(); 
+        //usleep(100);
+        stop(); 
       }
     }
 

@@ -88,4 +88,5 @@ curiosity-obs: curiosity-obs.o  environnement.o programme.o interprete.o \
 	$(CC) $^ -o $@
 
 clean:
-	rm -f $(PROGRAMMES) *.o curiosity-test0 curiosity-test1 curiosity-test2 curiosity-test3 curiosity-test4 curiosity-test5 curiosity-test6 curiosity-test7 curiosity-test8 curiosity-test9
+	rm -f $(PROGRAMMES) *.o curiosity-test0 curiosity-test1 curiosity-test2 curiosity-test3 \
+	curiosity-test4 curiosity-test5 curiosity-test6 curiosity-test7 curiosity-test8 curiosity-test9 fichier_erreur.txt

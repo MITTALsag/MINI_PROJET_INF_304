@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 bool verif_M = false;
+bool verif_propriete = true; //pour verifier si on veux verifier ka propriete
 
 /* Initialise l'environnement envt :
    - lit le terrain dans le fichier fichier_terrain
@@ -41,7 +42,7 @@ resultat_deplacement avancer_envt(Environnement *envt) {
     // Le robot est sorti
     return SORTIE;
   } 
-  else if (!verif_M){
+  else if (verif_propriete && !verif_M){
     printf("Le programme ne respecte pas la propriété (celle de faire une mesure avant d'avancer).\n");
     exit(1);
   }

@@ -1,5 +1,6 @@
 Terrains_Incorrects/terrain_sans_autorisation_ouverture.txt
 Terrains_Corrects/*.reecriture
+fichier_erreur.txt
 *.o
 test_terrain
 test_robot 

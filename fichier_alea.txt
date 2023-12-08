@@ -1,0 +1,82 @@
+
+Nombre de terrain testé : 20
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+curiosity est sorti, avec (102) pas.
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+curiosity est sorti, avec (72) pas.
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+curiosity est sorti, avec (72) pas.
+
+----------------------------------------------------------------------------
+curiosity est bloqué (il n'existe pas de chemin vers le bord du terrain depuis le centre) (-4).
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+curiosity est sorti, avec (271) pas.
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+curiosity est sorti, avec (397) pas.
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
+
+Curiosity est bloqué : le robot à atteint le nombre de pas max (-1)
+
+----------------------------------------------------------------------------
