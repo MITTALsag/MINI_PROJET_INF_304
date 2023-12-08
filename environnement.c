@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 bool verif_M = false;
-bool verif_propriete = true; //pour verifier si on veux verifier ka propriete
+bool verif_propriete = false; //pour verifier si on veux verifier ka propriete
 
 /* Initialise l'environnement envt :
    - lit le terrain dans le fichier fichier_terrain
