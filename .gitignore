@@ -1,8 +1,11 @@
 Terrains_Incorrects/terrain_sans_autorisation_ouverture.txt
+Terrains_Corrects/*.reecriture
 *.o
 test_terrain
-test_robot
-robot_terrain
-*.reecriture
+test_robot 
+robot_terrain 
 curiosity 
-curiosity-test
+curiosity-test 
+test_generation_terrains 
+curiosity-perf 
+curiosity-obs
