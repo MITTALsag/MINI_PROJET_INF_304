@@ -10,7 +10,7 @@
 #include <stdbool.h>
 
 bool silent_mode = true ;
-bool silent_avant_apres = false; //sert a montrer au debut et a la fin de l'execution
+bool silent_avant_apres = true; //sert a montrer au debut et a la fin de l'execution
 
 #define RED "\x1B[31m"
 #define GRN "\x1B[32m"
